@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import config as cfg
 
+
 def put(x, y, this, on_this):
     bh, bw, _ = on_this.shape
     h, w, a = this.shape
@@ -30,8 +31,10 @@ def put(x, y, this, on_this):
         bg[max(0, x):min(x + h, bh), max(0, y):min(y + w, bw)] = obj
     return bg
 
+
 def add_blur(img, blur_chance, blur_rate):
     if np.random.randint(0, 100) > blur_chance: return img
+
 
 def add_noise(img, noise_rate):
     noise_rate = get_rate(noise_rate)
@@ -40,11 +43,13 @@ def add_noise(img, noise_rate):
     noise = np.random.randint(-arg, arg, img.shape)
     return np.clip(img, arg, 255 - arg) + noise
 
+
 def get_rate(rate):
     if isinstance(rate, tuple):
         return np.random.rand() * (rate[1] - rate[0]) + rate[0]
     elif isinstance(rate, list):
         return np.random.choice(rate, 1)
+
 
 def generate_img(bg, obj):
     bg_img = cv2.imread(f"{cfg.bg_path}{bg}")
