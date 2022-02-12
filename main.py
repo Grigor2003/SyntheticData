@@ -30,8 +30,9 @@ bgs_img = [cv2.imread(cfg.bg_path + bg) for bg in bgs]
 objs_img = [cv2.imread(cfg.object_path + obj, -1) for obj in objs]
 for bg in bgs_img:
     for obj in objs_img:
-        data = generate_img(bg, obj)
-        cv2.imwrite(f"{ep_dir}data{n}.jpg", data)
-        n += 1
+        for _ in range(cfg.count):
+            data = generate_img(bg, obj)
+            cv2.imwrite(f"{ep_dir}data{n}.jpg", data)
+            n += 1
 b = time()
 print(b-a)
