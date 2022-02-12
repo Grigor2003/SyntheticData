@@ -44,6 +44,13 @@ def add_noise(img, noise_rate):
     return np.clip(img, arg, 255 - arg) + noise
 
 
+def scale_img(img, scale_rate):
+    scale_rate = get_rate(scale_rate)
+    h, w, _ = img.shape
+    scaled_img = cv2.resize(img, (int(w * scale_rate), int(h * scale_rate)))
+    return scaled_img
+
+
 def get_rate(rate):
     if isinstance(rate, tuple):
         return np.random.rand() * (rate[1] - rate[0]) + rate[0]
@@ -54,8 +61,8 @@ def get_rate(rate):
 def generate_img(bg, obj):
     bg_img = cv2.imread(cfg.bg_path + bg)
     obj_img = cv2.imread(cfg.object_path + obj, -1)
-    img = bg_img
-    oh, ow, _ = obj_img.shape
+    scaled_obj = scale_img(obj_img, cfg.scale_rate)
+    oh, ow, _ = scaled_obj.shape
     bh, bw, _ = bg_img.shape
     if cfg.out_of_bounds:
         fx = - oh // 2
@@ -67,13 +74,12 @@ def generate_img(bg, obj):
         tx = bh - oh
         ty = bw - ow
 
-    for _ in range(cfg.count):
-        cx = (tx - abs(fx)) / 2
-        cy = (ty - abs(fy)) / 2
-        x = int(np.random.normal(cx, cx / 2))
-        y = int(np.random.normal(cy, cy / 2))
-        x = np.clip(x, fx, tx)
-        y = np.clip(y, fy, ty)
-        img = put(x, y, obj_img, img)
+    cx = (tx - abs(fx)) / 2
+    cy = (ty - abs(fy)) / 2
+    x = int(np.random.normal(cx, abs(cx / 1.5)))
+    y = int(np.random.normal(cy, abs(cy / 1.5)))
+    x = np.clip(x, fx, tx)
+    y = np.clip(y, fy, ty)
+    img = put(x, y, scaled_obj, bg_img)
     img_noised = add_noise(img, cfg.noise_rate)
     return img_noised

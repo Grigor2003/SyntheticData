@@ -3,6 +3,7 @@ import cv2
 import os
 import config as cfg
 from utils import *
+from time import time
 
 if not os.path.isdir(cfg.result_path): os.makedirs(cfg.result_path)
 if not os.path.isdir(cfg.bg_path): raise Exception("Wrong bg_path")
@@ -17,6 +18,7 @@ os.makedirs(ep_dir)
 bgs = os.listdir(cfg.bg_path)
 objects = os.listdir(cfg.object_path)
 
+a = time()
 n = 0
 for bg in bgs:
     for obj in objects:
@@ -24,3 +26,5 @@ for bg in bgs:
 
         cv2.imwrite(f"{ep_dir}data{n}.jpg", data)
         n += 1
+b = time()
+print(b-a)
