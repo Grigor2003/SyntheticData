@@ -17,9 +17,9 @@ while True:
         m += 1
     else:
         break
+ep_dir = cfg.result_path + ep_dir + "/"
 
-
-os.makedirs(cfg.result_path + ep_dir)
+os.makedirs(ep_dir)
 bgs = os.listdir(cfg.bg_path)
 objs = os.listdir(cfg.object_path)
 
