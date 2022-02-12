@@ -58,9 +58,7 @@ def get_rate(rate):
         return np.random.choice(rate, 1)
 
 
-def generate_img(bg, obj):
-    bg_img = cv2.imread(cfg.bg_path + bg)
-    obj_img = cv2.imread(cfg.object_path + obj, -1)
+def generate_img(bg_img, obj_img):
     scaled_obj = scale_img(obj_img, cfg.scale_rate)
     oh, ow, _ = scaled_obj.shape
     bh, bw, _ = bg_img.shape

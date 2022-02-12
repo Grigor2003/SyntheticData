@@ -1,7 +1,7 @@
 # Add '/' or "\" at the end of dirs' PATHs
 result_path = "Result/"  # Enter Result folder's PATH
-bg_path = "bgs/"  # Enter background pictures' PATH
-object_path = "objects/"
+bg_path = "Bg/"  # Enter background pictures' PATH
+object_path = "Obj/"
 merge = True  # Ctesutyun
 bg_packages = True  # True for separate folders for bgs
 out_of_bounds = True
