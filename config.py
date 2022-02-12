@@ -1,0 +1,10 @@
+result_path = ""  # Enter Result folder's PATH
+bg_path = ""  # Enter background pictures' PATH
+object_path = ""  # Enter objects' PATH
+merge = True  # Ctesutyun
+bg_packages = True  # True for separate folders for bgs
+count = 1  # How many times will the object be placed on the bg
+scale = (0.5, 2)  # Scale, two element tuple for range, list for particular rates
+blur_chance = 1  # Chance of blurring the object
+blur_rate = (0.1, 0.9)  # Blur, two element tuple for range, list for particular rates
+noise_rate = (0.1, 1)  # Noise, two element tuple for range, list for particular rates
