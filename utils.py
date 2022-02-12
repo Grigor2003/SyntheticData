@@ -52,13 +52,28 @@ def get_rate(rate):
 
 
 def generate_img(bg, obj):
-    bg_img = cv2.imread(f"{cfg.bg_path}{bg}")
-    obj_img = cv2.imread(f"{cfg.object_path}{obj}", -1)
+    bg_img = cv2.imread(cfg.bg_path + bg)
+    obj_img = cv2.imread(cfg.object_path + obj, -1)
     img = bg_img
+    oh, ow, _ = obj_img.shape
+    bh, bw, _ = bg_img.shape
+    if cfg.out_of_bounds:
+        fx = - oh // 2
+        fy = - ow // 2
+        tx = bh + fx
+        ty = bw + fy
+    else:
+        fx, fy = 0, 0
+        tx = bh - oh
+        ty = bw - ow
 
     for _ in range(cfg.count):
-        x = np.random.randint(-obj_img.shape[0] + 1, bg_img.shape[0] - 1)
-        y = np.random.randint(-obj_img.shape[1] + 1, bg_img.shape[1] - 1)
+        cx = (tx - abs(fx)) / 2
+        cy = (ty - abs(fy)) / 2
+        x = int(np.random.normal(cx, cx / 2))
+        y = int(np.random.normal(cy, cy / 2))
+        x = np.clip(x, fx, tx)
+        y = np.clip(y, fy, ty)
         img = put(x, y, obj_img, img)
     img_noised = add_noise(img, cfg.noise_rate)
     return img_noised
