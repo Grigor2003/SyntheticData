@@ -2,6 +2,7 @@
 result_path = "Result/"  # Enter Result's folder PATH
 bg_path = "Bg/"  # Enter background pictures' folder PATH
 obj_path = "Obj/"  # Enter objects' folder PATH
+# Parameters
 ignore_symbol = "!!!!"  # You can specify symbol for skipping the object if it is in object's file name
 merge = True  # If False, creates separate folders for data and labels
 bg_packages = False  # True for separate folders for bg_names
