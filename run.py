@@ -1,9 +1,5 @@
-import numpy as np
-import cv2
-import os
-import config as cfg
 from utils import *
-from time import time
+from progressbar import ProgressBar
 
 if not os.path.isdir(cfg.result_path):
     os.makedirs(cfg.result_path)
@@ -25,28 +21,28 @@ else:
 
 bg_names = os.listdir(cfg.bg_path)
 
-s1 = time()
-##########################
 obj_images = get_objects()
-name_amount = 0
-for bg_name in bg_names:
-    bg = cv2.imread(cfg.bg_path + bg_name)
 
-    curr_data_path = data_path
-    curr_txt_path = txt_path
-    if cfg.bg_packages:
-        curr_data_path += bg_name.replace(".", "__") + "/"
-        curr_txt_path += bg_name.replace(".", "__") + "/"
-        os.makedirs(curr_data_path)
-        if not cfg.merge:
-            os.makedirs(curr_txt_path)
+with ProgressBar(max_value=get_amount(obj_images, bg_names)) as bar:
+    name_amount = 0
+    for bg_name in bg_names:
+        bg = cv2.imread(cfg.bg_path + bg_name)
 
-    for obj in obj_images:
-        for _ in range(cfg.count):
-            img, txt = generate_img(bg, obj)
-            save_as_txt(txt, curr_txt_path + str(name_amount))
-            cv2.imwrite(curr_data_path + str(name_amount) + ".jpg", img)
-            name_amount += 1
+        curr_data_path = data_path
+        curr_txt_path = txt_path
+        if cfg.bg_packages:
+            curr_data_path += bg_name.replace(".", "__") + "/"
+            curr_txt_path += bg_name.replace(".", "__") + "/"
+            os.makedirs(curr_data_path)
+            if not cfg.merge:
+                os.makedirs(curr_txt_path)
+
+        for obj in obj_images:
+            for _ in range(cfg.count):
+                img, txt = generate_img(bg, obj)
+                save_as_txt(txt, curr_txt_path + str(name_amount))
+                cv2.imwrite(curr_data_path + str(name_amount) + ".jpg", img)
+                name_amount += 1
+                bar.update(name_amount)
 ######################
-s2 = time()
-print(s2 - s1)
+input("press Enter...")

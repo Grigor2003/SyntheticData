@@ -4,6 +4,10 @@ import os
 import config as cfg
 
 
+def get_amount(obj, bg):
+    return cfg.count * len(obj) * len(bg)
+
+
 def get_new_epoch_path():
     m = 0
     p = os.listdir(cfg.result_path)
@@ -73,8 +77,10 @@ def add_noise(img, noise_rate):
 
 def scale_img(img, scale_rate):
     scale_rate = get_rate(scale_rate)
-    if scale_rate == 1: return img
-    elif scale_rate == 0: return np.zeros(shape=(1, 1, 4))
+    if scale_rate == 1:
+        return img
+    elif scale_rate == 0:
+        return np.zeros(shape=(1, 1, 4))
     h, w, _ = img.shape
     scaled_img = cv2.resize(img, (int(w * scale_rate), int(h * scale_rate)))
     return scaled_img
