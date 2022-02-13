@@ -18,9 +18,9 @@ Open config, set your result, bg, obj PATHs, set the parameters as you like and 
 * `count` - How many times an image will be generated with current bg and object
 * `distribution` - *linear* or *Gaussian* distribution for object placement
 * `scale_rate` - Scale of the object. Values from `0` to infinity for scaling based on the value as a multiplier
-* `blur_chance` - Chance of blurring the object. One number as a value only
+* `blur_chance` - Chance of blurring the object. One number as a value only, `0` - 0% chance, `1` - 100% chance
 * `blur_rate` - Blur on the object. Values from `(0, 1*)`, `0` - original image, `1` - fully blurred. *Values may be higher than `1` for extreme blur
-* `noise_rate` - Noise on the final image. Values from `(0, 1)`, `0` - original image, `1` complete noise
+* `noise_rate` - Noise on the final image. Values from `(0, 1)`, `0` - original image, `1` - complete noise
 
 
 `scale_rate`, `blur_rate` and `noise_rate` parameters must be given as two element tuple(`(a, b)`) for a random value from range, list/int/float(`[a, b, c]` / `d`) for a random particular rate.
