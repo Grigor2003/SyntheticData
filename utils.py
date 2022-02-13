@@ -33,7 +33,10 @@ def put(x, y, this, on_this):
 
 
 def add_blur(img, blur_chance, blur_rate):
-    if np.random.randint(0, 100) > blur_chance: return img
+    if np.random.randint(0, 100) > blur_chance * 100: return img
+    blur_rate = get_rate(blur_rate) * 8
+    blured_img = cv2.GaussianBlur(img, (0, 0), blur_rate)
+    return blured_img
 
 
 def add_noise(img, noise_rate):
@@ -60,17 +63,18 @@ def get_rate(rate):
 
 def generate_img(bg_img, obj_img):
     scaled_obj = scale_img(obj_img, cfg.scale_rate)
-    oh, ow, _ = scaled_obj.shape
+    blured_img = add_blur(scaled_obj, cfg.blur_chance, cfg.blur_rate)
+    oh, ow, _ = blured_img.shape
     bh, bw, _ = bg_img.shape
     if cfg.out_of_bounds:
+        fx, fy = 0, 0
+        tx = bh - oh
+        ty = bw - ow
+    else:
         fx = - oh // 2
         fy = - ow // 2
         tx = bh + fx
         ty = bw + fy
-    else:
-        fx, fy = 0, 0
-        tx = bh - oh
-        ty = bw - ow
 
     cx = (tx - abs(fx)) / 2
     cy = (ty - abs(fy)) / 2
@@ -78,6 +82,6 @@ def generate_img(bg_img, obj_img):
     y = int(np.random.normal(cy, abs(cy / 1.5)))
     x = np.clip(x, fx, tx)
     y = np.clip(y, fy, ty)
-    img = put(x, y, scaled_obj, bg_img)
+    img = put(x, y, blured_img, bg_img)
     img_noised = add_noise(img, cfg.noise_rate)
     return img_noised
