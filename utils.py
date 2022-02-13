@@ -4,7 +4,7 @@ import os
 import config as cfg
 
 
-def create_epoch():
+def get_new_epoch_path():
     m = 0
     p = os.listdir(cfg.result_path)
     while True:
