@@ -121,8 +121,8 @@ def generate_img(bg_img, obj_img):
         ty = bw - 1
     else:
         fx, fy = 0, 0
-        tx = bh - oh
-        ty = bw - ow
+        tx = max(1, bh - oh)
+        ty = max(1, bw - ow)
 
     if cfg.distribution == "gaussian":
         cx = (tx - abs(fx)) / 2
