@@ -1,6 +1,20 @@
 import numpy as np
 import cv2
+import os
 import config as cfg
+
+
+def create_epoch():
+    m = 0
+    p = os.listdir(cfg.result_path)
+    while True:
+        ep_dir = "epoch" + str(m)
+        if ep_dir in p:
+            m += 1
+        else:
+            break
+    ep_dir = cfg.result_path + ep_dir + "/"
+    return ep_dir
 
 
 def put(x, y, this, on_this):

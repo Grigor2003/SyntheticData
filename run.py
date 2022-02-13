@@ -9,16 +9,7 @@ if not os.path.isdir(cfg.result_path): os.makedirs(cfg.result_path)
 if not os.path.isdir(cfg.bg_path): raise Exception("Wrong bg_path")
 if not os.path.isdir(cfg.obj_path): raise Exception("Wrong obj_path")
 
-m = 0
-p = os.listdir(cfg.result_path)
-while True:
-    ep_dir = "epoch" + str(m)
-    if ep_dir in p:
-        m += 1
-    else:
-        break
-ep_dir = cfg.result_path + ep_dir + "/"
-
+ep_dir = create_epoch()
 os.makedirs(ep_dir)
 bgs = os.listdir(cfg.bg_path)
 objs = os.listdir(cfg.obj_path)
