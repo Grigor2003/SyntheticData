@@ -12,7 +12,7 @@ Open config, set your result, bg, obj PATHs, set the parameters as you like and 
 
 * `ignore_symbol` - You can specify symbol(s) for skipping the object if
   it is in object's file name
-* `merge` - If False, creates separate folders for data and labels(relative coordinates of the object on bg)
+* `merge` - False for createsing separate folders for data and labels(relative coordinates of the object on bg)
 * `bg_packages` - True for separate folders for each bg
 * `out_of_bounds` - True for allowing objects be out of bounds
 * `count` - How many times an image will be generated with current bg and object
