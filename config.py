@@ -13,3 +13,4 @@ scale_rate = (0.5, 2)
 blur_chance = 0
 blur_rate = (0.1, 0.3)
 noise_rate = 0
+
