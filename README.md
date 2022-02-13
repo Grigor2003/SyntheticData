@@ -6,7 +6,7 @@ With this program you can generate synthetic data for your AI's image detection 
 
 ## How to use
 
-Open config, set your result, bg, obj PATHs, set the parameters as you like and run the `run.py` file. It will generate every possible combination of a bg and an object.
+Open config, set your result, bg, obj PATHs, set the parameters as you like and run the `run.py` file. It will generate every possible combination of bg and object.
 
 ### Parameters
 
