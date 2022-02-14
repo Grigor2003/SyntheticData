@@ -45,4 +45,3 @@ with ProgressBar(max_value=get_amount(obj_images, bg_names)) as bar:
                 name_amount += 1
                 bar.update(name_amount)
 ######################
-input("press Enter...")

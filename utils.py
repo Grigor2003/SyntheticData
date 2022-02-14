@@ -59,6 +59,11 @@ def put(x, y, this, on_this):
     return bg
 
 
+def flip_img(img, flip_chance):
+    if np.random.randint(0, 100) > flip_chance * 100: return img
+    return cv2.flip(img, 1)
+
+
 def add_blur(img, blur_chance, blur_rate):
     if np.random.randint(0, 100) > blur_chance * 100: return img
     blur_rate = get_rate(blur_rate) * 8
@@ -109,7 +114,8 @@ def save_as_txt(text, path):
 
 
 def generate_img(bg_img, obj_img):
-    scaled_obj = scale_img(obj_img, cfg.scale_rate)
+    flipped_obj = flip_img(obj_img, cfg.flip_chance)
+    scaled_obj = scale_img(flipped_obj, cfg.scale_rate)
     blured_img = add_blur(scaled_obj, cfg.blur_chance, cfg.blur_rate)
 
     oh, ow, _ = blured_img.shape
