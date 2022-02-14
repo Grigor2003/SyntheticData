@@ -1,7 +1,8 @@
 import cv2
 import os
+from config import obj_path
 
-path = "Obj/"
+path = obj_path
 result = "Cut_" + path
 os.makedirs(result)
 obj_images = []
