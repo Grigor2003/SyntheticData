@@ -16,19 +16,25 @@ with ProgressBar(max_value=len(obj_images)) as bar:
         lx, ly, _ = img.shape
         maxX, maxY = -1, -1
         minX, minY = -1, -1
+
         for x in range(lx):
-            for y in range(ly):
-                if img[x, y, 3] != 0:
-                    if x > maxX: maxX = x
-                    if y > maxY: maxY = y
-                    if minX == -1:
-                        minX = x
-                    elif minX > x:
-                        minX = x
-                    if minY == -1:
-                        minY = y
-                    elif minY > y:
-                        minY = y
+            if sum(img[x, :, 3]) != 0:
+                minX = x
+                break
+        for x in range(1, lx):
+            if sum(img[-x, :, 3]) != 0:
+                maxX = lx - x + 1
+                break
+
+        for y in range(ly):
+            if sum(img[:, y, 3]) != 0:
+                minY = y
+                break
+        for y in range(1, ly):
+            if sum(img[:, -y, 3]) != 0:
+                maxY = ly - y + 1
+                break
+
         cv2.imwrite(result + str(img_n) + '.png', img[minX:maxX + 1, minY:maxY + 1, :])
         img_n += 1
         bar.update(img_n)
