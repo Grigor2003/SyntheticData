@@ -44,4 +44,3 @@ with ProgressBar(max_value=get_amount(obj_images, bg_names)) as bar:
                 cv2.imwrite(curr_data_path + str(name_amount) + ".jpg", img)
                 name_amount += 1
                 bar.update(name_amount)
-######################
