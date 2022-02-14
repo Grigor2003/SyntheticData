@@ -23,3 +23,9 @@ Open config, set your result, bg, obj PATHs, set parameters as you like and run 
 * `flip_chance` - Chance to flip an object horizontally. Only one number as value, `0` - probability 0%, `1` - probability 100%
 
 The `scale_rate`, `blur_rate` and `noise_rate` parameters must be given as a tuple with two values `(a, b)` for a random value from the range, list/int/float `[a, b, c]` / ` d` for a random specific value.
+
+---
+
+### Cropping you objects
+
+You can run `crop.py` to crop the empty edges of your objects from the obj folder you specified in `config.py`. This will create a new folder with all your cropped objects. 
