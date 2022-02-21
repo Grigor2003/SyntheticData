@@ -4,7 +4,7 @@ from progressbar import ProgressBar
 from config import obj_path
 
 path = obj_path
-result = "Cut_" + path
+result = path[:-1] + "_cut/"
 os.makedirs(result)
 obj_images = []
 for name in os.listdir(path):
@@ -19,20 +19,20 @@ with ProgressBar(max_value=len(obj_images)) as bar:
 
         for x in range(lx):
             if sum(img[x, :, 3]) != 0:
-                minX = x
+                minX = x - 1
                 break
         for x in range(1, lx):
             if sum(img[-x, :, 3]) != 0:
-                maxX = lx - x + 1
+                maxX = lx - x + 2
                 break
 
         for y in range(ly):
             if sum(img[:, y, 3]) != 0:
-                minY = y
+                minY = y - 1
                 break
         for y in range(1, ly):
             if sum(img[:, -y, 3]) != 0:
-                maxY = ly - y + 1
+                maxY = ly - y + 2
                 break
 
         cv2.imwrite(result + str(img_n) + '.png', img[minX:maxX + 1, minY:maxY + 1, :])
