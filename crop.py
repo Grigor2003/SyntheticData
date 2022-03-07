@@ -35,6 +35,7 @@ with ProgressBar(max_value=len(obj_images)) as bar:
                 maxY = ly - y + 1
                 break
 
-        cv2.imwrite(result + str(img_n) + '.png', img[minX - 1:maxX + 2, minY - 1:maxY + 2, :])
+        cv2.imwrite(result + str(img_n) + '.png', img[max(0, minX - 1):maxX + 2, max(0, minY - 1):maxY + 2, :])
         img_n += 1
         bar.update(img_n)
+        
