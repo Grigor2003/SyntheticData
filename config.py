@@ -6,12 +6,20 @@ obj_path = "Obj/"
 ignore_symbol = "!!!!"
 merge = False
 bg_packages = False
-out_of_bounds = False
+out_of_bounds = True
+out_of_bounds_rate = (0.1, 0.4)
 count = 1
-distribution = "linear"
-scale_rate = (0.5, 2)
+obj_count = (1, 2)
+# uniform
+distribution = "gaussian"
+blur_filter = "bilateralFilter"
+scale_rate = (0.5, 1.5)
 blur_chance = 0.7
-blur_rate = (0.1, 0.5)
-noise_rate = (0.1, 0.6)
+blur_spatial_rate = (2 * 0.35, 2 * 0.5)
+blur_intensity_rate = (20, 70)
+# uniform
+noise_type = "gaussian"
+noise_rate = (0.1, 0.2)
 flip_chance = 0.5
-
+# segmentation, classification
+save_type = 'segmentation'
